@@ -12,7 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6', '2.7', '3.0']
+        ruby-version: ['2.6']
+    services:
+      postgres: postgres:12
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTRGES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
