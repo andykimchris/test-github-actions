@@ -18,6 +18,20 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['2.6']
+    services:
+      postgres: postgres:12
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTRGES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -46,13 +60,13 @@ jobs:
         bundle install --jobs 4 --retry 3  
         
     
-    - name: Runs rails tests
-      env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        RAILS_ENV: test
-        run: |
-          bin/rails db:setup
-          bin/rails test
+#     - name: Runs rails tests
+#       env:
+#         DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
+#         POSTGRES_USER: postgres
+#         POSTGRES_PASSWORD: postgres
+#         RAILS_ENV: test
+#         run: |
+#           bin/rails db:setup
+#           bin/rails test
       
