@@ -1,10 +1,15 @@
-name: Ruby
+name: Hub V2 CI-CD
 
 on:
   push:
-    branches: [ main ]
+    branches: ["*"]
+    # branches:
+    #   - master
+    #   - development
+    #   - 'release/**'
   pull_request:
-    branches: [ main ]
+    branches: [main, master]
+
 
 jobs:
   test:
