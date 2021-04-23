@@ -74,8 +74,8 @@ jobs:
         PGUSER: postgres
         PGPASSWORD: postgres
         RAILS_ENV: test
-      run: |
-        # or Rspec
-        bundle exec rspec
+        run: |
+          # or Rspec
+          bundle exec rspec
 
 
