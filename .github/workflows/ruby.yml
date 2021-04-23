@@ -62,11 +62,11 @@ jobs:
     
     - name: Runs rails tests
       env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
-        POSTGRES_USER: postgres
+#         DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
+#         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         RAILS_ENV: test
         run: |
-          bin/rails db:setup
-          bin/rails test
+            bin/rails db:setup
+            bin/rails test
       
