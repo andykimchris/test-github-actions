@@ -82,7 +82,7 @@ jobs:
         node-version: '14'
     - run: npm install -g yarn
     - run: yarn install
-    - run: yarn build
+    - run: yarn run build
 
     - uses: paambaati/codeclimate-action@v2.7.5
       env:
@@ -93,7 +93,7 @@ jobs:
       # Deploy to AWS elastic beanstalk
   build:
     name: Deploy to Elastic Beanstalk
-    needs: test
+    needs: [ test, coverage ]
     runs-on: ubuntu-latest
     steps:
       - name: Beanstalk Deployment for V2 App
