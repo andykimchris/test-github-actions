@@ -59,6 +59,13 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3  
         
+    - name: Code climate Test Coverage
+      uses: paambaati/codeclimate-action@v2.7.5
+      env:
+        CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bc
+      with:
+        coverageCommand: npm run coverage
+        debug: true
     
 #     - name: Runs rails tests
 #       env:
@@ -71,40 +78,41 @@ jobs:
 #             bin/rails test
       
      #  test coverage with code-climate action
-  coverage:  
-    needs: [ test ]
-    name: Code climate Test Coverage
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '14'
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn run
 
-    - uses: paambaati/codeclimate-action@v2.7.5
-      env:
-        CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bc
-      with:
-        coverageCommand: yarn coverage
+#   coverage:  
+#     needs: [ test ]
+#     name: Code climate Test Coverage
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - uses: actions/setup-node@master
+#       with:
+#         node-version: '14'
+#     - run: npm install -g yarn
+#     - run: yarn install
+#     - run: yarn run
 
-      # Deploy to AWS elastic beanstalk
-  build:
-    name: Deploy to Elastic Beanstalk
-    needs: [ test, coverage ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Beanstalk Deployment for V2 App
-        uses: einaregilsson/beanstalk-deploy@v16
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: MyApplicationName
-          environment_name: MyApplication-Environment
-          region: "ap-south-1"
-          version_description: ${{ github.SHA }}
+#     - uses: paambaati/codeclimate-action@v2.7.5
+#       env:
+#         CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bc
+#       with:
+#         coverageCommand: yarn coverage
 
-      - name: Deployed!
-        run: echo App deployed to ELB
+#       # Deploy to AWS elastic beanstalk
+#   build:
+#     name: Deploy to Elastic Beanstalk
+#     needs: [ test, coverage ]
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Beanstalk Deployment for V2 App
+#         uses: einaregilsson/beanstalk-deploy@v16
+#         with:
+#           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           application_name: MyApplicationName
+#           environment_name: MyApplication-Environment
+#           region: "ap-south-1"
+#           version_description: ${{ github.SHA }}
+
+#       - name: Deployed!
+#         run: echo App deployed to ELB
