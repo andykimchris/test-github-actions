@@ -13,7 +13,7 @@ on:
 
 jobs:
   test:
-
+    name: Tests and Linting
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -60,39 +60,39 @@ jobs:
         bundle install --jobs 4 --retry 3  
         
     
-#     - name: Runs rails tests
-#       env:
-# #         DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
-# #         POSTGRES_USER: postgres
-#         POSTGRES_PASSWORD: postgres
-#         RAILS_ENV: test
-#         run: |
-#             bin/rails db:setup
-#             bin/rails test
+    - name: Runs rails tests
+      env:
+        DATABASE_URL: postgres://postgres:@localhost:5432/hub-v2-test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        RAILS_ENV: test
+        run: |
+            bin/rails db:setup
+            bin/rails test
       
      #  test coverage with code-climate action
-  coverage:
+  coverage:  
     needs: [ test ]
-    name: coverage
+    name: Code climate Test Coverage
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: '12'
+        node-version: '14'
     - run: npm install -g yarn
     - run: yarn install
     - run: yarn build
 
-    - uses: paambaati/codeclimate-action@v2.2.4
+    - uses: paambaati/codeclimate-action@v2.7.5
       env:
-        CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bd
+        CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bc
       with:
         coverageCommand: yarn coverage
 
       # Deploy to AWS elastic beanstalk
   build:
-    name: Deploy to EB
+    name: Deploy to Elastic Beanstalk
     needs: test
     runs-on: ubuntu-latest
     steps:
