@@ -72,21 +72,39 @@ jobs:
       
      #  test coverage with code-climate action
   coverage:
-    needs: test
-    name: Test & publish code coverage
+    needs: [ test ]
+    name: coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-        with:
-          node-version: "14"
-      - run: |
-          npm install -g yarn
-          yarn install
-          yarn build
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '12'
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn build
 
-      - uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bc
+    - uses: paambaati/codeclimate-action@v2.2.4
+      env:
+        CC_TEST_REPORTER_ID: 12f3e057d5a55fee802d0f7ad079a1433a0d3cdf66a3d738a2e31b60af3b26bd
+      with:
+        coverageCommand: yarn coverage
+
+      # Deploy to AWS elastic beanstalk
+  build:
+    name: Deploy to EB
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Beanstalk Deployment for V2 App
+        uses: einaregilsson/beanstalk-deploy@v16
         with:
-          coverageCommand: yarn coverage
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: MyApplicationName
+          environment_name: MyApplication-Environment
+          region: "ap-south-1"
+          version_description: ${{ github.SHA }}
+
+      - name: Deployed!
+        run: echo App deployed to ELB
