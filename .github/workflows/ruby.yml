@@ -1,4 +1,4 @@
-name: Hub V2 CI-CD
+name: V2 CI-CD
 
 on:
   push:
