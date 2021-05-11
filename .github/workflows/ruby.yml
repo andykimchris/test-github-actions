@@ -1,4 +1,4 @@
-name: Hub V2 CI-CD
+name: V2 CI-CD
 
 on:
   push:
@@ -41,6 +41,14 @@ jobs:
       with:
         ruby-version: 2.6.3
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - name: Ruby gem cache
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
 
     - name: Install Node
       uses: actions/setup-node@v2
