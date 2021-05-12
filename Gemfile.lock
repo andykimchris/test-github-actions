@@ -63,7 +63,7 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     aws-eventstream (1.1.1)
-    aws-partitions (1.453.0)
+    aws-partitions (1.454.0)
     aws-sdk (3.0.2)
       aws-sdk-resources (~> 3)
     aws-sdk-accessanalyzer (1.19.0)
@@ -707,7 +707,7 @@ GEM
     aws-sdk-resourcegroupstaggingapi (1.37.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-resources (3.101.0)
+    aws-sdk-resources (3.102.0)
       aws-sdk-accessanalyzer (~> 1)
       aws-sdk-acm (~> 1)
       aws-sdk-acmpca (~> 1)
@@ -949,6 +949,8 @@ GEM
       aws-sdk-sns (~> 1)
       aws-sdk-sqs (~> 1)
       aws-sdk-ssm (~> 1)
+      aws-sdk-ssmcontacts (~> 1)
+      aws-sdk-ssmincidents (~> 1)
       aws-sdk-ssoadmin (~> 1)
       aws-sdk-ssooidc (~> 1)
       aws-sdk-states (~> 1)
@@ -989,7 +991,7 @@ GEM
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3control (1.32.0)
+    aws-sdk-s3control (1.33.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3outposts (1.2.0)
@@ -1061,6 +1063,12 @@ GEM
     aws-sdk-ssm (1.110.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
+    aws-sdk-ssmcontacts (1.0.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-ssmincidents (1.0.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sigv4 (~> 1.1)
     aws-sdk-ssoadmin (1.7.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
@@ -1094,7 +1102,7 @@ GEM
     aws-sdk-transcribeservice (1.54.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-transcribestreamingservice (1.28.0)
+    aws-sdk-transcribestreamingservice (1.29.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-transfer (1.32.0)
@@ -1304,7 +1312,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 2.7.3p183
 
 BUNDLED WITH
    2.2.17
