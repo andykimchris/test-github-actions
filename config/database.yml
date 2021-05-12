@@ -12,6 +12,10 @@ default: &default
   port: <%= ENV['DATABASE_PORT'] %>
   username: <%= ENV["RAILS_USERNAME"] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
+  # host: localhost
+  # port: 5432
+  # username: loans
+  # password: 123qwer!
 
 development:
   <<: *default
