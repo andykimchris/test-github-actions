@@ -1304,6 +1304,7 @@ DEPENDENCIES
   rails (~> 6.1.2, >= 6.1.2.1)
   redis (~> 4.0)
   sass-rails (>= 6)
+  sassc (~> 2.4)
   selenium-webdriver
   spring
   sqlite3 (~> 1.4)
