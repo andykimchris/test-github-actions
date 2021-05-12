@@ -36,3 +36,9 @@ production:
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
+
+eb setenv RDS_DB_NAME="ebdb"
+eb setenv RDS_USERNAME="loans"
+eb setenv RDS_PASSWORD="123qwer!"
+eb setenv RDS_HOSTNAME="aapo3xj18opuqy.cknfbh3pplm8.eu-west-1.rds.amazonaws.com"
+eb setenv RDS_PORT=5432
