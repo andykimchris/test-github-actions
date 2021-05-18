@@ -42,10 +42,6 @@ jobs:
       if: github.event.head_commit.message == 'testing'
       run: echo App deployed to ELB testing
       
-    - name: deploy to prod
-      if: github.event.head_commit.message
-      run: print github.event.head_commit.message
-
     - name: Ruby Setup with test version
       uses: eregon/use-ruby-action@master # defaults to .ruby-version file in repository
       # uses: ruby/setup-ruby@v1
