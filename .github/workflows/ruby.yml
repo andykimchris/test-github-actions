@@ -57,6 +57,16 @@ jobs:
 #         restore-keys: |
 #           ${{ runner.os }}-gems-
 
+    - name: Runs rails tests
+      env:
+        DATABASE_URL: postgres://postgres:@localhost:5432/actions_test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        RAILS_ENV: test
+      run: |
+        bin/rails db:test:prepare
+        bundle exec rspec  --require rails
+
     - name: Install Node
       uses: actions/setup-node@v2
       with:

@@ -6,12 +6,13 @@
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
-  username: <%= ENV["RAILS_USERNAME"] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: localhost
+  port: 5432
+  username: loans
+  password: 123qwer!
   # host: localhost
   # port: 5432
   # username: loans
@@ -27,18 +28,3 @@ development:
 test:
   <<: *default
   database: actions_test
-
-production:
-  adapter: postgresql
-  encoding: utf8
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
-
-eb setenv RDS_DB_NAME="ebdb"
-eb setenv RDS_USERNAME="loans"
-eb setenv RDS_PASSWORD="123qwer!"
-eb setenv RDS_HOSTNAME="aapo3xj18opuqy.cknfbh3pplm8.eu-west-1.rds.amazonaws.com"
-eb setenv RDS_PORT=5432
