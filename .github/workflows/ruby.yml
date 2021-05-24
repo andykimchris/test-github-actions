@@ -65,7 +65,7 @@ jobs:
         RAILS_ENV: test
       run: |
         bin/rails db:test:prepare
-        bin/rails test  --require rails
+        bin/rails test
 
 
     - name: Install PostgreSQL client
