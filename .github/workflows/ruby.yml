@@ -39,7 +39,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: deploy
-      if: github.event.head_commit.message == 'testing'
+      if: github.event.head_commit.message == 'testing version 3'
       run: echo App deployed to ELB testing
       
     - name: Ruby Setup with test version
