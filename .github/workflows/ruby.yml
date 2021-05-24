@@ -65,6 +65,7 @@ jobs:
         RAILS_ENV: test
       run: |
         bin/rails db:test:prepare
+        bin/rails db:migrate RAILS_ENV=test
         bin/rails test
 
 
