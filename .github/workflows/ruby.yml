@@ -65,15 +65,8 @@ jobs:
         RAILS_ENV: test
       run: |
         bin/rails db:test:prepare
-        bundle exec rspec  --require rails
+        bin/rails test  --require rails
 
-    - name: Install Node
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - run: npm install
-  
-  
 
     - name: Install PostgreSQL client
       run: |
